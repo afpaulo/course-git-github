@@ -1,0 +1,114 @@
+
+Planner do Projeto: Matrícula Escolar Online (React & Material UI)
+
+Níveis de Ensino:
+- Creche e Jardim (CJ)
+- Pré-Escolar (PE): Iniciação
+- Ensino Primário (EP): 1ª Classe, 2ª Classe, 3ª Classe, 4ª Classe, 5ª Classe, 6ª Classe
+- Ensino Secundário (ES) (Iº Ciclo): 7ª Classe, 8ª Classe, 9ª Classe
+- Ensino Técnico Profissional (TP): 10ª Classe, 11ª Classe, 12ª Classe, 13ª Classe
+
+Fase Inicial (Starter)
+Objetivo: Selecionar o nível de ensino.
+- Componente sugerido: Cards do tipo Primary Action, com imagens e breves descrições de cada nível de ensino.
+- Ação: Após selecionar o nível, o usuário avança para a Fase de Verificação.
+
+Sugestão: 
+- Utiliza o estado global (via useContext ou Redux) para armazenar o nível de ensino selecionado. Esta informação será usada em fases futuras para diferenciar processos, como escolha de classe ou curso.
+
+Fase Inicial (Verificação)
+Objetivo: Verificar a existência do aluno na base de dados e evitar duplicidade de matrículas.
+- Campos:
+  1. Nacionalidade
+  2. Província
+  3. Documento de ID
+  4. Nº de ID
+  5. Data de Emissão do ID
+  6. Sector de Emissão
+
+Ação:
+- O sistema deve consultar a base de dados específica do nível de ensino escolhido (ex.: CrecheJardimMatricula, EnsinoPrimarioMatricula) para verificar se o aluno já está matriculado.
+
+Sugestão:
+- Implementa uma chamada de API para verificar a matrícula no banco de dados certo, com base no nível de ensino selecionado.
+
+Steps (Fases Específicas)
+
+Step 1: Dados Pessoais
+Campos:
+1. Nome completo do aluno
+2. Primeiro nome 
+3. Último nome
+4. Sexo
+5. Data de nascimento
+6. Naturalidade
+7. Município
+8. Residência (Bairro, Rua ou Avenida)
+9. O aluno reside com os pais? (Sim/Não)
+10. Necessidade especial
+11. Doença crónica
+
+Sugestão:
+- Usa um formulário passo a passo, com validação de campos obrigatórios, para garantir que todos os dados sejam preenchidos corretamente.
+
+Step 2: Dados Parentais
+Campos:
+1. Nome Completo
+2. Status Profissional
+3. Profissão
+4. Função
+5. Local de Trabalho
+6. Telefone Principal
+7. Telefone Alternativo (Opcional)
+8. Email Pessoal
+9. Confirmar Email Pessoal
+
+Sugestão:
+- Implementa autocompletar e validação automática de emails e números de telefone.
+
+Step 3: Dados do Encarregado de Educação
+Campos:
+1. Quem é o encarregado de educação? (Pai, Mãe, Outro)
+2. Sexo
+3. Relação com o aluno
+4. Nome Completo
+5. Status Profissional
+6. Profissão
+7. Função
+8. Local de Trabalho
+9. Telefone Principal
+10. Telefone Alternativo (Opcional)
+11. Email Pessoal
+12. Confirmar Email Pessoal
+
+Sugestão:
+- Se o encarregado for "Pai" ou "Mãe", os dados são automaticamente preenchidos com base nas informações fornecidas nos Dados Parentais. Caso seja "Outro", permite o preenchimento manual dos campos.
+
+Step 4: Dados Académicos
+Campos:
+1. Curso (Dependente do nível de ensino)
+2. Classe (Dependente do nível de ensino)
+3. Período
+4. ATL (Atividades de Tempo Livre)
+5. Transporte Escolar
+6. Passe do Aluno
+
+Sugestão:
+- A classe e o curso devem ser carregados dinamicamente com base no nível de ensino selecionado anteriormente. Filtra as opções para evitar escolhas incorretas.
+
+Step 5: Uploads
+Campos:
+1. Foto Tipo Passe
+2. Documento de Identificação
+3. Certificado das Habilitações Literárias (Nível Anterior)
+
+Sugestão:
+- Utiliza o componente Dropzone do Material UI para facilitar o upload de documentos. Implementa validação para garantir que os formatos corretos de arquivo sejam carregados.
+
+Confirmação Final dos Dados
+- Após todos os steps, o usuário revisa os dados inseridos. Se estiver tudo correto, finaliza a matrícula.
+
+Considerações Técnicas:
+1. Estado Global: O nível de ensino selecionado precisa ser armazenado em um estado global (via useContext ou Redux) e reutilizado nas fases seguintes.
+2. Formulários Dinâmicos: Renderiza os campos dinamicamente de acordo com as escolhas feitas em fases anteriores (ex.: encarregado de educação ou classe/curso dependente do nível de ensino).
+3. Validação de Dados: Usa bibliotecas como Formik ou Yup para garantir que todos os campos obrigatórios sejam preenchidos corretamente e que haja validação adequada (especialmente em campos como email e números de telefone).
